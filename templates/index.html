@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Magnificent Hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/static/kathmandu-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: blur(3px) brightness(0.75); /* 增加模糊和降低亮度 */
+            opacity: 0.6; /* 降低透明度 */
+            z-index: -2;
+        }
+        body {
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #2C3E50;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* 装饰性容器 */
+        .decorative-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* 左侧装饰 */
+        .left-decoration {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 90vh;
+            background: url('/static/left-mandala.png') no-repeat center/contain;
+            opacity: 0.5;
+            animation: floatLeft 20s infinite ease-in-out;
+        }
+
+        /* 右侧装饰 */
+        .right-decoration {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 90vh;
+            background: url('/static/right-mandala.png') no-repeat center/contain;
+            opacity: 0.5;
+            animation: floatRight 20s infinite ease-in-out;
+        }
+
+        /* 顶部装饰边框 */
+        .top-border {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('/static/nepal-border.png') repeat-x center/auto 100%;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* 底部装饰边框 */
+        .bottom-border {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('/static/nepal-border.png') repeat-x center/auto 100%;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* 动画效果 */
+        @keyframes floatLeft {
+            0%, 100% { transform: translateY(-50%) translateX(-10px); }
+            50% { transform: translateY(-50%) translateX(0); }
+        }
+
+        @keyframes floatRight {
+            0%, 100% { transform: translateY(-50%) translateX(10px); }
+            50% { transform: translateY(-50%) translateX(0); }
+        }
+
+        /* 主容器样式 */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 品牌标识样式 */
+        .brand-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .brand-name {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-name img {
+            width: auto;
+            height: 50px;
+            box-shadow: none;
+            border: none;
+        }
+
+        .brand-name img:hover {
+            transform: none;
+        }
+
+        /* 表单容器样式 */
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* 表单组样式 */
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #34495E;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #D4A017;
+            box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.1);
+        }
+
+        /* 按钮样式 */
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #D32F2F, #B71C1C);
+            color: white;
+            font-size: 1.1rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        /* 卡片容器样式 */
+        .card-container {
+            margin-top: 2.5rem;
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 2.5rem auto 0;
+        }
+
+        .card-container h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+            color: #34495E;
+            text-align: center;
+        }
+
+        .card-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .card-container img:hover {
+            transform: scale(1.02);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .left-decoration,
+            .right-decoration {
+                width: 200px;
+            }
+
+            .landmark-left,
+            .landmark-right {
+                width: 150px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .left-decoration,
+            .right-decoration,
+            .landmark-left,
+            .landmark-right {
+                display: none;
+            }
+
+            .top-border,
+            .bottom-border {
+                height: 40px;
+            }
+
+            .brand-container {
+                padding: 1.5rem;
+            }
+
+            .logo {
+                width: 60px;
+            }
+
+            .brand-name img {
+                height: 35px;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .card-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 装饰性元素 -->
+    <div class="decorative-container">
+        <div class="top-border"></div>
+        <div class="bottom-border"></div>
+        <div class="left-decoration"></div>
+        <div class="right-decoration"></div>
+        <div class="landmark-left"></div>
+        <div class="landmark-right"></div>
+    </div>
+
+    <!-- 主要内容包装器 -->
+    <div class="main-content">
+        <div class="brand-container">
+            <img src="/static/hotel_logo.png" alt="Magnificent Hotel Logo" class="logo">
+            <div class="brand-name">
+                <img src="/static/magnificent.png" alt="Magnificent">
+                <img src="/static/hotel.png" alt="Hotel">
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form action="/generate" method="post">
+                <div class="form-group">
+                    <label>Guest Name</label>
+                    <input type="text" name="guest_name" required placeholder="Enter guest name">
+                </div>
+
+                <div class="form-group">
+                    <label>Country</label>
+                    <input type="text" name="country" required placeholder="Enter country">
+                </div>
+
+                <div class="form-group">
+                    <label>Number of Nights</label>
+                    <input type="number" name="nights" required placeholder="Enter number of nights">
+                </div>
+
+                <button type="submit">Generate Welcome Card</button>
+            </form>
+        </div>
+
+        {% if img_path %}
+        <div class="card-container">
+            <h2>Your Welcome Card</h2>
+            <img src="{{ img_path }}" alt="Your Welcome Card">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
